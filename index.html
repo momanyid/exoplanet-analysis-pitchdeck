@@ -11,16 +11,37 @@
       height: 100%;
       width: 100%;
       overflow: hidden;
+      background: #000;
     }
-    embed {
-      display: block;
+    .pdf-viewer {
       width: 100%;
       height: 100vh;
       border: none;
+      display: block;
+    }
+    .fallback {
+      display: none;
+      color: white;
+      text-align: center;
+      padding-top: 2rem;
+      font-family: sans-serif;
     }
   </style>
 </head>
 <body>
-  <embed src="Smart-Telescope.pdf" type="application/pdf">
+  <embed src="Smart-Telescope.pdf" type="application/pdf" class="pdf-viewer" id="pdfViewer">
+  <div class="fallback" id="fallback">
+    <p>PDF preview not supported on this device.</p>
+    <a href="Smart-Telescope.pdf" style="color:#4DA3FF; text-decoration:none; font-weight:bold;">Open PDF</a>
+  </div>
+
+  <script>
+    // If embed fails to load, show fallback
+    const embed = document.getElementById('pdfViewer');
+    embed.addEventListener('error', () => {
+      embed.style.display = 'none';
+      document.getElementById('fallback').style.display = 'block';
+    });
+  </script>
 </body>
 </html>
